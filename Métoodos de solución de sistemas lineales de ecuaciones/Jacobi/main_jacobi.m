@@ -15,4 +15,4 @@ b = [8,10,12];
 x0 = [1,1,1];
 kmax = 20;
 
-x = Jacobi (A,b,x0,tol=0.001,kmax)
+[x,k] = Jacobi (A,b,x0,tol=0.001,kmax)
