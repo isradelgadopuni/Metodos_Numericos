@@ -11,7 +11,7 @@
 % x = Vector de salida solucion 
 %
 
-function x = Jacobi (A,b,x0,tol=0.001,kmax)
+function [x,k] = Jacobi (A,b,x0,tol=0.001,kmax)
 x(:,1)= x0
 for k = 1: kmax
   for i = 1: length(x0)
