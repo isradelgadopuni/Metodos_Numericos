@@ -1,4 +1,5 @@
-
+pkg symbolic load
+syms R
 %Punto Fijo   Raíces de ecuaciones .
 %   PUNTOFIJO(FUN,A,ITER,TOL) 
 %       puntof = pf(f, xi, iter, tol)
@@ -8,28 +9,38 @@
 %       iter = número máximo de iteraciones
 %       tol = tolerancia
 
-function [xn,datos,i] = PUNTO_FIJO (fun, fung, xi,tol=0.0001,iter=1000)
-  f = fun;
-  g = fung;
+function [xn,datos,i] = PUNTO_FIJO (f,xi,tol,iter)
+  syms R
   i=1;
-  while 1
-    xn=g(xi);
-    ea=abs(xn-xi);
+  df = diff(f,R);
+  %condicion = subs(df,R,xi)
+  while i < iter 
+    condicion = subs(df,R,xi);
+    xn=f(xi)
     datos(i,1)=xn;
-    datos(i,2)=ea;
-    xi = xn;
-    if i>iter
+    datos(i,2)=abs(((xn-xi)/xn));
+ 
+    if  abs(condicion) > 1
+      xn = NaN
+      msgID = 'PUNTO_FIJO:condicion';
+      msg = 'Error: |g´(xi)| > 1';
+      error(msgID,msg);
+
+    elseif i+1>iter
         msgID = 'PUNTO_FIJO:iteraciones';
         msg = 'Gran número de iteraciones, posiblemente el método divergió';
         #baseException = MException(msgID,msg);
         #throw(baseException);
         error(msgID,msg)
-    elseif ea<tol
-        break;
-    endif
+    else
+        if abs(((xn-xi)/xn)) <= tol
+            break;
+        else
+            xi = xn;
+        end
+    end
     i=i+1;
-   endwhile
-endfunction
+end
 %ezplot(Fx);%graficamos la funcion
 %grid on;
 
