@@ -3,14 +3,15 @@
 %Anthony Dominguez
 %Cristiam Romero
 %Fecha: 17-10-2021
-%Descripcion: Realizar 2 ejemplos del método de Regula Falsi
+%Descripcion: Realizar 2 ejemplos del mÃ©todo de Regula Falsi
 %
 
 
 % Problema 1:
 %   
-%   Descripción del problema 1
-% 
+% La siguiente ecuacion modela el comportamiento de como varia el voltaje aplicado en un circuito a traves del tiempo
+% calcule los momento para los cuales el voltaje aplicado al circuito es 0 
+%
 
 
 %f = @(x) x.^3 - 10
@@ -26,7 +27,7 @@ datos=""
 
 try 
   [y,datos,i] = regula_falsi (f, a, b);
-  fprintf('El valor de corte en y=0 es x=%d, el número de iteraciones es %d\n',y,i);
+  fprintf('El valor de corte en y=0 es x=%d, el nÃºmero de iteraciones es %d\n',y,i);
   
   
   h=figure(1);
